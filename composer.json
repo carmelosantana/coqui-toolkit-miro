@@ -1,0 +1,74 @@
+{
+    "name": "carmelosantana/coqui-toolkit-miro",
+    "description": "Miro REST API toolkit for Coqui — authenticate, create and manage boards, items, collaborators, tags, frames, groups, webhooks, and board activity summaries.",
+    "type": "library",
+    "license": "MIT",
+    "keywords": [
+        "coqui",
+        "miro",
+        "whiteboard",
+        "boards",
+        "collaboration",
+        "toolkit",
+        "php-agents"
+    ],
+    "authors": [
+        {
+            "name": "Carmelo Santana"
+        }
+    ],
+    "require": {
+        "php": "^8.4",
+        "symfony/http-client": "^7.0"
+    },
+    "require-dev": {
+        "carmelosantana/php-agents": "^0.7",
+        "pestphp/pest": "^3.0",
+        "phpstan/phpstan": "^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CarmeloSantana\\CoquiToolkitMiro\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CarmeloSantana\\CoquiToolkitMiro\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "php-agents": {
+            "toolkits": [
+                "CarmeloSantana\\CoquiToolkitMiro\\MiroToolkit"
+            ],
+            "credentials": {
+                "MIRO_ACCESS_TOKEN": "Miro access token or personal token for direct REST API access.",
+                "MIRO_API_TOKEN": "Alternate Miro token variable supported by this toolkit.",
+                "MIRO_CLIENT_ID": "Miro OAuth app client ID.",
+                "MIRO_CLIENT_SECRET": "Miro OAuth app client secret.",
+                "MIRO_DEFAULT_TEAM_ID": "Default Miro team ID for creating boards.",
+                "MIRO_WEBHOOKS_BASE_PATH": "Optional webhook collection path override, defaults to /v2-experimental/webhooks/board_subscriptions."
+            },
+            "gated": {
+                "miro_board": ["delete"],
+                "miro_item": ["delete"],
+                "miro_group": ["ungroup", "delete"],
+                "miro_collaborator": ["remove"],
+                "miro_tag": ["delete"],
+                "miro_webhook": ["delete"]
+            }
+        }
+    },
+    "scripts": {
+        "test": "pest",
+        "analyse": "phpstan analyse --memory-limit=1G"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
